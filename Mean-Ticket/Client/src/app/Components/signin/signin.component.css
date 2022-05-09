@@ -1,0 +1,32 @@
+.container-fluid {
+    height: 90vh;
+    overflow: hidden;
+    /* width: auto; */
+    color: #fff;
+    background-color: rgb(44, 58, 89)
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+form {
+    height: 80vh;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+form .form-control {
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-top: 15px;
+    background-color: #00ADB5;
+    color: #fff;
+}

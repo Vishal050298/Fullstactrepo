@@ -1,0 +1,117 @@
+<div class="bach">
+    <button type="button" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
+        (click)="frame.show()" mdbWavesEffect >
+        Create Ticket
+    </button>
+    <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="offset-md-4 col-md-4 d-flex flex-column justify-content-center align-item-center"
+                    style="height: 100vh">
+                    <form class="formBg" #ticketform="ngForm" (ngSubmit)="onSubmit(ticketform);frame.hide()">
+                        <h1>Generate Ticket</h1>
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="ticketservice.selectedTicket._id" />
+                        <div class="form-group">
+                            <label for="empid" class="mb-2">Employee_Id</label>
+                            <input name="empid" #empid="ngModel" [(ngModel)]="ticketservice.selectedTicket.empid"
+                                type="text" class="form-control mb-3" id="empid" aria-describedby="empidhelpp"
+                                placeholder="Enter Employee_Id ..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="empname" class="mb-2">Employee_Name</label>
+                            <input name="empname" #empname="ngModel" [(ngModel)]="ticketservice.selectedTicket.empname"
+                                type="text" class="form-control mb-3" id="empname" placeholder="Enter Employee_Name..."
+                                disabled />
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket_desc" class="mb-2">Description</label>
+
+                            <textarea name="ticket_desc" #ticket_desc="ngModel"
+                                [(ngModel)]="ticketservice.selectedTicket.ticket_desc"
+                                class="form-control mb-3 formDesc" id="ticket_desc"
+                                placeholder="Enter Description..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button (click)="frame.hide();onClose()" type="button" class="btn btn-success">
+                            Close
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mat-elevation-z8">
+        <mat-form-field class="paginator" appearance="standard">
+            <mat-label class="filter">Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search here" #input />
+        </mat-form-field>
+        <table class="bg" mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="empid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by empid">
+                    Employee_Id
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.empid }}</td>
+            </ng-container>
+            <ng-container matColumnDef="empname">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by empname">
+                    Employee_Name
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.empname }}</td>
+            </ng-container>
+            <ng-container matColumnDef="ticket_desc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by ticket_desc">
+                    Description
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.ticket_desc }}</td>
+            </ng-container>
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by empid">
+                    Created_At
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.created_at }}</td>
+            </ng-container>
+            <ng-container matColumnDef="updated_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by empid">
+                    Updated_At
+                </th>
+
+                <td mat-cell *matCellDef="let element">{{ element.updated_at }}</td>
+            </ng-container>
+            <ng-container matColumnDef="deleted_at">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by empid">
+                    Resolved
+                </th>
+                <td mat-cell *matCellDef="let element">{{element.deleted_at?Moment(element.deleted_at):null }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="Edit">
+                <th mat-header-cell *matHeaderCellDef>Edit</th>
+                <td mat-cell *matCellDef="let element">
+                    <button style="margin-right: 5px;align-items: left;" (click)="onEdit(element);frame.show()"
+                        [disabled]="!(authservice.user._id === element.creator) || element.Resolved" mat-raised-button
+                        color="primary">
+                        Edit
+                    </button>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Delete">
+                <th mat-header-cell *matHeaderCellDef>Resolved</th>
+                <td mat-cell *matCellDef="let element">
+                    <button [disabled]="!(authservice.user._id === element.creator) || element.Resolved"
+                        mat-raised-button color="warn" (click)="onDelete(element)">
+                        Resolved
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row class="page" *matHeaderRowDef="Columnsdisplayed; sticky: true"></tr>
+            <tr mat-row [ngClass]="{'make-gold': row.Resolved}" *matRowDef="let row; columns: Columnsdisplayed"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[ 10]" showFirstLastButtons aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+</div>
