@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
-import { Login_Data } from '../__classes/login';
+import { Signin_Data } from '../__classes/login';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
@@ -10,14 +10,14 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  login_Data = new  Login_Data("","");
+  signin_Data = new  Signin_Data("","");
 
   constructor(private authService: AuthService, private router:Router,public flashMessagesService: FlashMessagesService)
    { 
-      if(this.authService.loggedIn()) {
+      if(this.authService.signedIn()) {
         this.router.navigateByUrl('/home');
       }
-      {this.authService.isloggedin}
+      {this.authService.signedIn}
    }
 
   ngOnInit(): void {
@@ -29,15 +29,15 @@ export class SigninComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    const login_Data = new Login_Data(this.login_Data.username, this.login_Data.password);
+    const signin_Data = new Signin_Data(this.signin_Data.username, this.signin_Data.password);
 
-    this.authService.authenticationUser(login_Data).subscribe(res => {
+    this.authService.authenticationUser(signin_Data).subscribe(res => {
       if(res.accessToken) {
         console.log(res)
         this.authService.storeUserData(res.accessToken, res.token);
-        this.authService.isloggedin = true
+        this.authService.issignedin = true
         this.authService.user = res.Result
-        this.flashMessagesService.show('Loged In Successfully...!!!',{cssClass: 'alert-danger',timeout: 4500});
+        this.flashMessagesService.show('Signed In Successfully...!!!',{cssClass: 'alert-danger',timeout: 4500});
         this.router.navigate(['home']);
       }
 

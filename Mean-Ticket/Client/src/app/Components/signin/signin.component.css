@@ -2,8 +2,8 @@
     height: 90vh;
     overflow: hidden;
     /* width: auto; */
-    color: #fff;
-    background-color: rgb(44, 58, 89)
+    color: blue;
+    background-color: rgba(0, 1, 2, 0)
 }
 
 h2 {
@@ -27,6 +27,7 @@ form .form-control {
 
 .btn {
     margin-top: 15px;
-    background-color: #00ADB5;
+    background-color: #0012b5;
     color: #fff;
+    width: auto;
 }

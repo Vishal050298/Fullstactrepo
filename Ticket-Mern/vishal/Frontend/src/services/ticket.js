@@ -16,7 +16,8 @@ class Ticket  {
   }
 
   deleteTicket = (id) => {
-    return axios.delete(`${baseUrl}/tickets/${id}`)
+    
+    return axios.post(`${baseUrl}/tickets/${id}`)
   }
 }
 export default new Ticket();

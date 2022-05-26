@@ -6,17 +6,15 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FormGroup, InputLabel, Input } from '@material-ui/core';
-//import { useDispatch } from "react-redux";
-//import { updateTicket } from "../actions/ticket";
-//import { useResolvedPath } from 'react-router-dom';
-//import { createTicket } from '../actions/ticket';
-//import { getTickets } from '../actions/ticket';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import { updateTicket } from '../actions/ticket';
-import { useDispatch, useSelector } from 'react-redux'
-//import TicketGrid from "./TicketGrid";
+import { useDispatch } from 'react-redux'
+
 const EditForm = ({cellValues}) => {
 
     const [ticket, setTicket] = useState(cellValues.row)
+    const user = JSON.parse(localStorage.getItem("user"))
+    console.log(user)
     
     const [open, setOpen] = React.useState(false);
     
@@ -29,12 +27,12 @@ const EditForm = ({cellValues}) => {
     const dispatch = useDispatch();
     const validateDetails  = (e) => {
         dispatch(updateTicket(ticket))
-        //setCurrentId(0)
         setTicket({...ticket, empid:'', ticket_desc:''})
     }
     return (
         <>
-            <Button variant='contained' color='primary' onClick={handleClickOpen}>
+            <Button disabled={!(user.accessToken.fullname === cellValues.row.empname)||cellValues.row.deleted_at} onClick={handleClickOpen}>
+                <EditTwoToneIcon />
                 Edit
             </Button>
             <Dialog open={open} onClose={handleClose}>

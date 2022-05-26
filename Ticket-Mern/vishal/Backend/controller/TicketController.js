@@ -21,7 +21,6 @@ export const createTicket = async (req, res) => {
         console.log(newTicket)
         res.status(200).json(newTicket)
 
-
     } catch (error) {
         res.status(404).json({ message: error.message })
     }
@@ -30,17 +29,14 @@ export const createTicket = async (req, res) => {
 
 export const updateTicket = async (req, res) => {
 
-    console.log(req.body)
     const ticket = req.body;
 
-    const{_id}= req.body
-
-    // if(!mongoose.Types.ObjectId.isValid(_id)) return res.send(`No ticket with id: ${_id}`);
+    const{ _id } = req.body
 
     const updateTicket = { ...ticket, updated_at: new Date().toISOString(), _id }
 
     const updatedTicket = await Ticket.findByIdAndUpdate(_id, updateTicket, { new: true });
-    console.log('updatedTicket')
+    
     res.json(updatedTicket);
 }
 
@@ -56,18 +52,16 @@ export const getTickets = async (req, res) => {
 }
 export const deleteTicket = async (req, res) => {
     
-    try{
-    const { id } = req.params;
-    console.log(id)
+    const ticket = req.body;
     
-    //if (!mongoose.Types.ObjectId.isValid(id)) return res.send(`No ticket with id: ${id}`);
+    const { id } = req.params;
+   
+    if(!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).send(`No ticket with id: ${id}`);
 
-    await Ticket.findByIdAndDelete( id );
+    const deleteTicket = ({...ticket, resolved: true, empid: ticket.empid, ticket_desc: ticket.ticket_desc, deleted_at: new Date(), Date: new Date().toISOString(), id: id }); 
 
-    res.json({message: "Ticket Deleted Successfully...!!!"});
-    }
-    catch(error){
-        console.log(error)
-    }
+    const delTicket = await Ticket.findByIdAndUpdate(id, deleteTicket, {new: true});
+    res.json(delTicket);
 }
 

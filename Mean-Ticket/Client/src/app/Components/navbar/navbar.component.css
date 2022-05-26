@@ -1,0 +1,11 @@
+.navbar{
+    background-color: black;
+    color: #fff;
+    flex-direction: row-reverse;
+    
+}
+#navbarNav{
+    
+    flex-direction: row-reverse;
+    
+}

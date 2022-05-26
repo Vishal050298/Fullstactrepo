@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       _id: '',
       ticket_desc: '',
       empid: 0,
-      empname: authservice.user.name,
+      empname: authservice.user.fullname,
       creator: authservice.user._id,
       created_at: '',
       updated_at: '',
@@ -48,6 +48,8 @@ export class HomeComponent implements OnInit {
       this.ticketservice.Tickets = res as Ticket[];
       this.dataSource = new MatTableDataSource(this.ticketservice.Tickets);
       this.dataSource.paginator = this.paginator;
+      console.log(this.authservice.user)
+      console.log(this.ticketservice.Tickets)
     });
   }
   applyFilter(event: Event) {
@@ -64,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     form.value.creator = this.authservice.user._id;
-    form.value.empname = this.authservice.user.name;
+    form.value.empname = this.authservice.user.fullname;
     if (form.value._id == "" || form.value._id == null) {
       this.ticketservice.postTickets(form.value).subscribe((res) => {
         this.resetForm(form);
@@ -85,12 +87,12 @@ export class HomeComponent implements OnInit {
     if (form) {
       this.ticketservice.selectedTicket._id = '';
       this.ticketservice.selectedTicket.ticket_desc = '';
-      this.ticketservice.selectedTicket.empname = this.authservice.user.name;
+      this.ticketservice.selectedTicket.empname = this.authservice.user.fullname;
       this.ticketservice.selectedTicket.empid = 0;
     }
     this.ticketservice.selectedTicket._id = '';
     this.ticketservice.selectedTicket.ticket_desc = '';
-    this.ticketservice.selectedTicket.empname = this.authservice.user.name;
+    this.ticketservice.selectedTicket.empname = this.authservice.user.fullname;
     this.ticketservice.selectedTicket.empid = 0;
   }
   onClose() {

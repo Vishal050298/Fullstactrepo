@@ -6,7 +6,7 @@ const ticketReducer = (ticket = [], action) => {
             return [...ticket, action.data]
 
         case FETCH_ALL:
-            // console.log(action.data)
+           
             return action.data
 
         case UPDATE:
@@ -20,10 +20,10 @@ const ticketReducer = (ticket = [], action) => {
 
         case DELETE:
             return ticket.map(ticket => {
-                if(ticket._id !== action.id){
+                if(ticket._id !== action.payload._id){
                     return ticket
                 }else{
-                    return ticket
+                    return action.payload
                 }
             })
         default:

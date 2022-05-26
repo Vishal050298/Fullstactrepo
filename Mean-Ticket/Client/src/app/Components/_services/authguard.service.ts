@@ -12,7 +12,7 @@ export class AuthguardService implements CanActivate {
     canActivate() {
 
       if(this.authService.loggedIn()) {
-        this.authService.isloggedin = true
+        this.authService.issignined = true
 
         return true;
       }

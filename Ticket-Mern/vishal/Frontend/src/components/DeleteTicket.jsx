@@ -1,21 +1,25 @@
 import { Button } from "@mui/material";
-import { deleteTicket, getTickets } from "../actions/ticket";
+import { deleteTicket } from "../actions/ticket";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
+import { Box } from "@material-ui/core";
 
 const DeleteTicket = ({cellValues}) => {
-    //const empid = JSON.parse(localStorage.getItem('user'))?.user
+    const user = JSON.parse(localStorage.getItem('user'))
     const dispatch = useDispatch()
     const delTicket = () =>{
         if(window.confirm("Are You Sure? You Want To Delete These Data...!!!")) {
-            dispatch(deleteTicket(cellValues.row._id)).then(dispatch(getTickets()))
+            dispatch(deleteTicket(cellValues.row._id))
         }
     }
 
     return(
-        <Button variant="contained" color="primary" onClick={delTicket}>
-            Delete
-        </Button>
+        
+            <Button disabled={!(user.accessToken.fullname === cellValues.row.empname)||cellValues.row.deleted_at} onClick={delTicket}>
+                <DeleteTwoToneIcon />
+                Resolved
+            </Button>
+        
     )
 }
 export default DeleteTicket;

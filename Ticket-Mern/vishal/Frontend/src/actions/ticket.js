@@ -3,9 +3,9 @@ import Ticket from '../services/ticket.js';
 
 export const createTicket = (ticket) => async dispatch => {
     try {
-        // console.log(ticket)
+        
         const { data } = await Ticket.createTicket(ticket);
-        console.log(data)
+       
 
         dispatch({ type: CREATE , data })
 
@@ -19,7 +19,7 @@ export const getTickets = () => async dispatch => {
     try {
         
         const {data} = await Ticket.getTickets();
-        console.log(data)
+        
         dispatch({ type: FETCH_ALL, data })
     }
     catch (error) {
@@ -29,7 +29,7 @@ export const getTickets = () => async dispatch => {
 
 export const updateTicket = (ticket) => async dispatch => {
     try{
-        console.log(ticket)
+       
         const {data} = await Ticket.updateTicket(ticket)
         dispatch({type: UPDATE, data})
     }
@@ -40,9 +40,10 @@ export const updateTicket = (ticket) => async dispatch => {
 
 export const deleteTicket = (id) => async dispatch => {
     try{
-        await Ticket.deleteTicket(id)
         
-        dispatch({type: DELETE, id})
+        const {data}=await Ticket.deleteTicket(id)
+        
+        dispatch({type: DELETE, payload:data})
     }
     catch(error){
         throw error

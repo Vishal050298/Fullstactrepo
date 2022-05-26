@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor(public AuthService: AuthService, public router: Router) 
   {
     this.AuthService.user
-    if(this.AuthService.loggedIn()) {
+    if(this.AuthService.signedIn()) {
       this.router.navigate(['home']);
     }
   }
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
 
   onLogoutClick() {
     this.AuthService.logout();
-    this.AuthService.isloggedin = false;
+    this.AuthService.issignedin = false;
     this.router.navigate(['/signin']);
   }
 

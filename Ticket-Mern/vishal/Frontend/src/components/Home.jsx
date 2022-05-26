@@ -1,10 +1,9 @@
 import React from 'react'
-// import NavbarComponent from './NavbarComponent'
-import heroimg from './images/hero.jpg'
+import heroimg from './images/hero.jpg';
 
 const Home = () => {
     return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', overflow:'hidden', marginTop:'10px'}}>
             
             <img src={heroimg} alt='Help-Desk'/>
 

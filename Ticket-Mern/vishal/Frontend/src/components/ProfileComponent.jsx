@@ -6,13 +6,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FormGroup, InputLabel, Input } from '@material-ui/core';
-//import { useResolvedPath } from 'react-router-dom';
 import { createTicket } from '../actions/ticket';
 import { getTickets } from '../actions/ticket';
-import { updateTicket } from '../actions/ticket';
 import { useDispatch, useSelector } from 'react-redux'
 import TicketGrid from "./TicketGrid";
 import { Box } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 export default function FormDialog() {
   const [userold] = useState(JSON.parse(localStorage.getItem('user')))
@@ -47,7 +46,7 @@ export default function FormDialog() {
     setticket({ ...ticket, empid: '', ticket_desc: '' });
     setOpen(false)
   }
-  
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -60,15 +59,15 @@ export default function FormDialog() {
 
   return (
     <div>
-      <Box testAlign='center' style={{margin:'20px 0 ', display:'flex', justifyContent:'center'}}>
+      <Box testAlign='center' style={{ margin: '20px 0 ', display: 'flex', justifyContent: 'center' }}>
         <Button variant="contained" color="primary" onClick={handleClickOpen}>
-          Add Ticket
+         <AddIcon/>Add Ticket
         </Button>
       </Box>
-      
+
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle align="center">ADD DETAILS PROPERLY</DialogTitle>
+        <DialogTitle align="center">ADD DETAILS </DialogTitle>
         <DialogContent>
           <FormGroup>
             <InputLabel htmlFor="empid">Employee_ID</InputLabel>
@@ -78,7 +77,7 @@ export default function FormDialog() {
               name="empid"
               value={ticket.empid}
               id="empid"
-              inputProps={{ maxLength: 50 }}
+              inputProps={{ maxLength: 10 }}
             />
           </FormGroup>
           <TextField

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Login_Data } from '../__classes/login';
+import { Signin_Data } from '../__classes/login';
 import { User } from '../__classes/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -11,17 +11,18 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
   authToken: any;
-  login_Data!: Login_Data;
+  signin_Data!: Signin_Data;
   user!: User;
-  isloggedin: boolean = false;
+  issignedin: boolean = false;
+  signedIn: any;
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  authenticationUser(login_Data: Login_Data): Observable<any> {
+  authenticationUser(signin_Data: Signin_Data): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    return this.http.post("http://localhost:8080/users/signIn", login_Data, { headers: headers });
+    return this.http.post("http://localhost:8080/users/signIn", signin_Data, { headers: headers });
   }
 
   storeUserData(user: any, token: any) {

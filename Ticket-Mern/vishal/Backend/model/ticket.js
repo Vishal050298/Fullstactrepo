@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
-import autoIncrement from 'mongoose-auto-increment';
-
 
 const ticketSchema = mongoose.Schema({
-    ticket_title: String,
     ticket_desc: String,
     create_at: {
         type: String,
@@ -27,8 +24,6 @@ const ticketSchema = mongoose.Schema({
     }
 })
 
-autoIncrement.initialize(mongoose.connection);
-ticketSchema.plugin(autoIncrement.plugin, 'ticketCollection');
 
 const ticketModel = mongoose.model('ticketCollection', ticketSchema)
 
