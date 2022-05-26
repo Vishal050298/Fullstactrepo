@@ -14,8 +14,7 @@ export class AuthService {
   signin_Data!: Signin_Data;
   user!: User;
   issignedin: boolean = false;
-  signedIn: any;
-
+  
   constructor(private http: HttpClient, private router: Router) { }
 
   authenticationUser(signin_Data: Signin_Data): Observable<any> {
@@ -44,7 +43,7 @@ export class AuthService {
     this.user = JSON.parse(localStorage.getItem('user')|| '{}')
   }
 
-  loggedIn() {
+  signedIn() {
     const helper = new JwtHelperService();
     this.loadToken()
     const isNotExpired = !helper.isTokenExpired(this.authToken);

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg">
-    <div *ngIf="this.AuthService.isloggedin === false; else issignedin" class="container-fluid">
+    <div *ngIf="this.AuthService.issignedin === false; else issignedin" class="container-fluid">
         Ticketing System
         <div class="collapse navbar-collapse" id="navbarNav">
             
@@ -17,6 +17,7 @@
     </div>
     <ng-template #issignedin>
         <div class="collapse navbar-collapse" id="navbarNav">
+            
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page">Signed In As {{AuthService.user.fullname}}</a>

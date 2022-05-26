@@ -1,7 +1,7 @@
 <div class="bach">
     <div class="Addbtn">
     <button type="button" class="Add" mdbBtn color="default" rounded="true" data-toggle="modal" data-target="#basicExample"
-        (click)="frame.show()" mdbWavesEffect style="background-color: blue;">
+        (click)="frame.show()" mdbWavesEffect>
         Raise Ticket
     </button></div>
     <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
@@ -35,7 +35,7 @@
                         </div>
                         <button type="submit" class="btn">Create</button>
                         <button (click)="frame.hide();onClose()" type="button" class="btn">
-                            Close
+                            Cancle
                         </button>
                     </form>
                 </div>
